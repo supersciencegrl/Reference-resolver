@@ -1,4 +1,5 @@
 import urllib.parse
+import sys
 
 import pyperclip
 
@@ -22,11 +23,28 @@ def generate_search_url(input_string):
     base_url = "https://chemsearch.kovsky.net/index.php?q="
     encoded_reference = urllib.parse.quote(input_string)
     result = f"{base_url}{encoded_reference}"
-    pyperclip.copy(result)
     
     return result
 
-# Test the function
-# input_string = "OL 2015, 17, 5728"
-result_url = generate_search_url(input_string)
-print(result_url)
+def run(input_string = "OL 2015, 17, 5728"):
+    """
+    Runs the Kovsky reference resolver script.
+
+    If no kwarg or CLI arg is provided, a default test reference string is used.
+    Otherwise, the provided reference string is used.
+
+    Prints the generated search URL and copies it to the clipboard, unless '-nopaste' is in the command-line arguments.
+    """
+    if len(sys.argv) > 1:
+        input_string = sys.argv[1]
+
+    # Generate the result url
+    result_url = generate_search_url(input_string)
+    print(result_url)
+
+    # Copy the result url to clipboard
+    if '-nopaste' not in sys.argv:
+        pyperclip.copy(result_url)
+
+if __name__ == '__main__':
+    run()
