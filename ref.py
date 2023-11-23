@@ -20,7 +20,11 @@ def generate_search_url(input_string):
         >>> generate_search_url("OL 2015, 17, 5728")
         'https://chemsearch.kovsky.net/index.php?q=OL%202015,%2017,%205728'
     """
-    base_url = "https://chemsearch.kovsky.net/index.php?q="
+    if input_string.startswith('10.'):
+        base_url = 'https://doi.org/'
+    else:
+        base_url = "https://chemsearch.kovsky.net/index.php?q="
+    
     encoded_reference = urllib.parse.quote(input_string)
     result = f"{base_url}{encoded_reference}"
     
