@@ -3,7 +3,7 @@ import sys
 
 import pyperclip
 
-def generate_search_url(input_string):
+def generate_search_url(input_string: str) -> str:
     """
     Generate a URL for chemical search based on the input.
 
@@ -30,7 +30,7 @@ def generate_search_url(input_string):
     
     return result
 
-def run(input_string = "OL 2015, 17, 5728"):
+def run(input_string: str = "OL 2015, 17, 5728") -> None:
     """
     Runs the Kovsky reference resolver script.
 
